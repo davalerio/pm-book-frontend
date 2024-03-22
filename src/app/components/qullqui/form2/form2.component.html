@@ -1,0 +1,219 @@
+<form [formGroup]="selectForm">
+  <!-- Tipo de persona -->
+  <div class="row">
+    <p>Tipo de persona</p>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Perfil</mat-label>
+      <mat-select formControlName="profile" (selectionChange)="valProfile()">
+        <mat-option *ngFor="let item of profiles" [value]="item.profile_id">{{
+          item.name
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="selectForm.get('profile')?.errors?.['required']">
+        Este campo es <strong>requerido</strong></mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Datos empresa -->
+  <div class="row" *ngIf="showData">
+    <p>Datos empresa</p>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>RUC</mat-label>
+      <input type="text" matInput formControlName="ruc" [minlength]="limitRuc" [maxlength]="limitRuc" />
+      <mat-error *ngIf="this.selectForm.get('ruc')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+      <mat-error *ngIf="this.selectForm.get('ruc')?.errors?.['pattern']">Debes ingresar un dato <strong>válido</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Razón Social</mat-label>
+      <input type="text" matInput formControlName="businessname" />
+      <mat-error *ngIf="this.selectForm.get('businessname')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+      <mat-error *ngIf="this.selectForm.get('businessname')?.errors?.['pattern']">Debes ingresar un dato
+        <strong>válido</strong></mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Datos personales -->
+  <div class="row">
+    <p>Datos personales</p>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Tipo de documento</mat-label>
+      <mat-select formControlName="typedoc" (selectionChange)="valDocument()">
+        <mat-option *ngFor="let item of documents" [value]="item.code">{{
+          item.code
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="selectForm.get('typedoc')?.errors?.['required']">
+        Este campo es <strong>requerido</strong></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Número de documento</mat-label>
+      <input type="text" matInput formControlName="numberdoc" [minlength]="limitDoc" [maxlength]="limitDoc"
+        [pattern]="this.patterDocument" />
+      <mat-error *ngIf="this.selectForm.get('numberdoc')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+      <mat-error *ngIf="this.selectForm.get('numberdoc')?.errors?.['pattern']">Debes ingresar un dato<strong>
+          válido</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Nombres</mat-label>
+      <input type="text" matInput formControlName="firstname" />
+      <mat-error *ngIf="this.selectForm.get('firstname')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+      <mat-error *ngIf="this.selectForm.get('firstname')?.errors?.['pattern']">
+        Debes ingresar un dato <strong>válido</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Primer Apellido</mat-label>
+      <input type="text" matInput formControlName="lastnamefather" />
+      <mat-error *ngIf="this.selectForm.get('lastnamefather')?.errors?.['required']">
+        Este campo es <strong>requerido</strong></mat-error>
+      <mat-error *ngIf="this.selectForm.get('lastnamefather')?.errors?.['pattern']">
+        Debes ingresar un dato<strong>válido</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Segundo Apellido</mat-label>
+      <input type="text" matInput formControlName="lastnamemother" />
+      <mat-error *ngIf="this.selectForm.get('lastnamemother')?.errors?.['required']">
+        Este campo es <strong>requerido</strong></mat-error>
+      <mat-error *ngIf="this.selectForm.get('lastnamemother')?.errors?.['pattern']">Debes ingresar un
+        dato<strong>válido</strong></mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Datos de contacto -->
+  <div class="row">
+    <p>Datos del contacto</p>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Correo electrónico</mat-label>
+      <input type="text" matInput formControlName="email" />
+      <mat-error *ngIf="this.selectForm.get('email')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+      <mat-error *ngIf="this.selectForm.get('email')?.errors?.['pattern']">El email ingresado no es<strong>
+          válido</strong></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Celular</mat-label>
+      <input type="text" matInput formControlName="phone" maxlength="9" minlength="9" />
+      <mat-error *ngIf="this.selectForm.get('phone')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+      <mat-error *ngIf="this.selectForm.get('phone')?.errors?.['pattern']">Debes ingresar un dato<strong>
+          válido</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Dirección</mat-label>
+      <input type="text" matInput formControlName="address" />
+      <mat-error *ngIf="this.selectForm.get('address')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Departamento</mat-label>
+      <mat-select (selectionChange)="AllProvince()" formControlName="department" #dep>
+        <mat-option *ngFor="let item of departments" [value]="item.id">{{
+          item.name
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.selectForm.get('department')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Provincia</mat-label>
+      <mat-select (selectionChange)="AllDistrict()" formControlName="province" #pro>
+        <mat-option *ngFor="let item of provinces" [value]="item.id">{{
+          item.name
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.selectForm.get('province')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Distrito</mat-label>
+      <mat-select formControlName="district" #dis>
+        <mat-option *ngFor="let item of districts" [value]="item.id">{{
+          item.name
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.selectForm.get('district')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Detalle reclamo/queja/sugerencia -->
+  <div class="row">
+    <p>Detalles del reclamo/queja</p>
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Servicio</mat-label>
+      <mat-select formControlName="service">
+        <mat-option *ngFor="let item of services" [value]="item.name">{{
+          item.name
+          }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.selectForm.get('service')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Monto</mat-label>
+      <input matInput formControlName="amount" />
+      <mat-error *ngIf="this.selectForm.get('amount')?.errors?.['required']">
+        Este campo es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="typerequest">
+        <mat-option *ngFor="let item of requests" [value]="item.name">{{ item.name }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.selectForm.get('typerequest')?.errors?.['required']">
+        Este campo es <strong>requerido</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Fecha y Hora</mat-label>
+      <input matInput [ngxMatDatetimePicker]="picker" formControlName="day" />
+      <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+      <mat-error *ngIf="this.selectForm.get('day')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 co-xl-12 pb-3">
+      <mat-label>Descripción y solicitud</mat-label>
+      <textarea matInput cols="30" rows="10" formControlName="message"></textarea>
+      <mat-error *ngIf="this.selectForm.get('message')?.errors?.['required']">Este campo es
+        <strong>requerido</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row pb-3">
+    <div class="text-center">
+      <button type="button" (click)="SendEmail(selectForm.value)" mat-raised-button color="primary" class="px-4 mx-2">
+        Enviar
+      </button>
+      <button type="button" mat-raised-button color="warn" (click)="Cancel()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="close"></mat-icon>
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>
