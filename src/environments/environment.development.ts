@@ -1,4 +1,4 @@
 export const environment = {
-  domain: 'http://localhost:3000',
+  domain: 'https://server.perumoney.pe',
   production: false,
 };
