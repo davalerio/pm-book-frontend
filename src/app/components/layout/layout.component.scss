@@ -10,14 +10,15 @@ body {
     position: relative;
   }
 }
+
 .left {
-  background-image: url(../../../assets/media/img/bg/left.png);
+  background-image: url('~src/assets/images/bg/left.png');
   background-size: cover;
   background-position: center;
 }
 
 .right {
-  background-image: url(../../../assets/media/img/bg/right.png);
+  background-image: url('~src/assets/images/bg/right.png');
   background-size: cover;
   background-position: center;
 }
@@ -31,10 +32,12 @@ body {
   align-items: center;
   flex-direction: column;
 }
+
 .right img,
 .left img {
   width: 48px;
 }
+
 .right button,
 .left button {
   background: transparent;
@@ -45,6 +48,7 @@ body {
   color: white;
   transition: all 200ms;
 }
+
 .right button:hover,
 .left button:hover {
   color: blue;
@@ -53,12 +57,14 @@ body {
 }
 
 @media (min-width: 850px) {
+
   .right,
-.left {
+  .left {
     flex: 0 1 50%;
     height: 100vh;
   }
 }
+
 .logo img {
   width: 100px;
   position: fixed;
@@ -73,6 +79,7 @@ body {
   text-align: center;
   margin: 1rem 0;
 }
+
 .text-content p {
   margin: 0;
   line-height: 1.2;
