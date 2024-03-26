@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "notiflix"
             ],
-            "outputPath": "dist/pm-lrvirtual-f",
+            "outputPath": "dist/public_html",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
