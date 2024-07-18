@@ -1,4 +1,4 @@
 export const environment = {
-  domain: 'https://server.perumoney.pe',
+  domain: 'https://pm-book-backend-production.up.railway.app',
   production: false,
 };
